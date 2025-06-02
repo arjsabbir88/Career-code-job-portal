@@ -1,8 +1,40 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useContext } from "react";
 import register from "../../assets/register.json";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Register = () => {
+
+    const {user,createUser,updateUser,setUser} = useContext(AuthContext)
+
+    const handleRegister =(e)=>{
+        e.preventDefault();
+        console.log("clicked");
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log({name,email,password})
+        createUser(email,password)
+        .then(result => {
+            console.log(result.user)
+
+            updateUser({displayName: name})
+            .then(()=>{
+                setUser({ ...user, displayName:name})
+            })
+            .catch(error=>{
+                console.log(error.massage)
+            })
+
+        }).catch(error=>{
+            console.log(error)
+        })
+
+    }
+
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -17,17 +49,18 @@ const Register = () => {
               </h1>
               <p className="text-gray-400">Please Enter your details</p>
             </div>
-            <form className="fieldset">
+            <form onSubmit={handleRegister} className="fieldset">
               <label className="label">Name</label>
               <input
-                type="email"
+                name="name"
+                type="text"
                 className="input"
                 placeholder="Enter your name"
               />
               <label className="label">Email</label>
-              <input type="email" className="input" placeholder="Email" />
+              <input type="email" name="email" className="input" placeholder="Email" />
               <label className="label">Password</label>
-              <input type="password" className="input" placeholder="Password" />
+              <input type="password" name="password" className="input" placeholder="Password" />
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>

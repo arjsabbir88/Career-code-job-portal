@@ -1,22 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AuthContext } from './AuthContext'
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from 'firebase/auth'
+import { auth } from '../Firebase/Firebase.config'
 
 
-const auth = getAuth();
 const AuthProvider = ({children}) => {
+    const [loading, setLoading] = useState(true);
+    const [user,setUser] = useState(null)
 
-   const createUser =()=>{
-    return (createUserWithEmailAndPassword(auth,email, password)
-    .then((userData)=>{
-        console.log(userData)
-    }))
+   const createUser =(email,password)=>{
+    setLoading(true)
+    return createUserWithEmailAndPassword(auth,email, password).finally(()=>{setLoading(false)})
+    
+   }
+
+   const updateUser = (updateData)=>{
+    setLoading(true)
+    return  updateProfile(auth.currentUser, updateData).finally(()=>setLoading(false))
    }
    
-// project-562013229402
-    const authInfo={
-        createUser
+
+   // project-562013229402
+   const authInfo={
+       user,
+       createUser,
+       updateUser,
+       setUser
     }
+
+
+    useEffect(()=>{
+         const unSubscribe = onAuthStateChanged(auth, currentUser=>{
+ 
+             setUser(currentUser);
+             setLoading(false);
+         });
+ 
+         return ()=>{
+             unSubscribe()
+         }
+ 
+    },[])
   return (
     <>
         <AuthContext value={authInfo}>{children}</AuthContext>
