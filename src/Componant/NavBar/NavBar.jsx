@@ -5,12 +5,12 @@ const NavBar = () => {
 
     const links = <>
         <ul>
-            <NavLink to='/' className='btn btn-soft btn-accent'>Home</NavLink>
+            <NavLink to='/' className='btn btn-soft font-bold text-white bg-[#3c65f5] hover:bg-transparent hover:text-[#05264e]'>Home</NavLink>
         </ul>
     </>
 
   return (
-    <div className="navbar bg-base-100 drop-shadow-2xl">
+    <div className="navbar bg-base-100 drop-shadow-2xl text">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -39,7 +39,8 @@ const NavBar = () => {
             }
           </ul>
         </div>
-        <a className="text-xl font-bold hover:cursor-pointer">Career<span className="text-accent font-extrabold">Code</span></a>
+        <img src="https://i.ibb.co/d0yprQpM/Annotation-2025-06-03-003142-removebg-preview.png" alt="" className="w-20" />
+        <a className="text-xl font-bold hover:cursor-pointer">Career<span className="font-extrabold text-red-600">Code</span></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -51,8 +52,8 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link to='/auth/register' className="btn btn-soft btn-accent">Register</Link>
-        <Link to='/auth/login' className="btn btn-soft btn-accent ml-5">Login</Link>
+        <Link to='/auth/register' className="underline font-bold text-[#05264e]">Register</Link>
+        <Link to='/auth/login' className="btn btn-soft font-bold bg-[#3c65f5] text-white ml-5 hover:bg-transparent hover:text-[#05264e]">Login</Link>
       </div>
     </div>
   );

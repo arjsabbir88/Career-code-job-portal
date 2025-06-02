@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+text{
+  color: #05264e;
+}

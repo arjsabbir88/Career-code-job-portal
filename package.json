@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.44.1",
     "@tailwindcss/vite": "^4.1.8",
+    "firebase": "^11.8.1",
+    "lottie-react": "^2.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.6.1",
